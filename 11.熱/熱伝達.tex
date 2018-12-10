@@ -1,0 +1,118 @@
+\documentclass[a4paper,11pt,uplatex]{jsarticle}
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{here}
+
+%テキストの表示領域の調節
+\setlength{\textwidth}{\paperwidth}
+\addtolength{\textwidth}{-40truemm}
+\setlength{\textheight}{\paperheight}
+\addtolength{\textheight}{-45truemm}
+
+%余白の調節
+\setlength{\topmargin}{-10.4truemm}
+\setlength{\evensidemargin}{-5.4truemm}
+\setlength{\oddsidemargin}{-5.4truemm}
+\setlength{\headheight}{17pt}
+\setlength{\headsep}{10mm}
+\addtolength{\headsep}{-17pt}
+\setlength{\footskip}{5mm}
+
+% \nofiles
+\begin{document}
+\section{目的}
+工業製品は適切な温度状態に保たれなければならない．例えば，コンピュータのCPUは稼働中に多量の熱を発するため，うまく放熱されない場合には温度が上昇し続けて物理的に演算のできない状態に陥る．したがって，効率よく放熱処理を施すことは必須である．ここでは，熱移動の基本形式の一つである対流熱伝達について理解を深める．
+\section{原理}
+空気や水などの流体内に温度差が生じると熱膨張による密度差によって流体に運動が発生する．このような現象を自然対流と呼ぶ.
+図hogeのように静止した空気中に高温物体を設置すると壁近傍に熱せられた空気の層(温度境界層)が生じ，浮力によってそうないの空気が上方に流動して熱を運んでいく．このような電熱形式を自然対流熱伝達という．
+\par
+一方，外部からの仕事によって発生する流体の運動は強制対流と呼ぶ．またこの時に行われる熱移動を強制熱対流伝達と呼ぶ．
+
+\par
+物体の壁面温度を$T_w$[K]，流体の壁より十分離れた位置における温度を$T_0$[K]，面積$A[\mathrm{m^2}]$の物体表面より単位時間当たりに放出される熱量を$Q$[W]とすると，$Q$は一般的に以下のように表される．
+\begin{align}
+  Q=hA(T_w-T_0)
+\end{align}
+上式で定義される$h$[W/($\mathrm{m^2}$K)]を熱伝達率と呼ぶ．$h$の値は対流の種類や強さ，流体の種類によって変化するが，通常の条件下では以下の範囲になる．
+\begin{table}[H]
+\begin{tabular}{lrrl}
+静止気体中の自然対流 & 1-    & 25     &  W/($\mathrm{m^2}K$)\\
+気体の強制対流    & 10-   & 250    &  W/($\mathrm{m^2}K$)\\
+液体の強制対流    & 150-  & 5000   &  W/($\mathrm{m^2}K$)\\
+相変化(沸騰・凝縮) & 1000- & 250000 & W/($\mathrm{m^2}K$)
+\end{tabular}
+\end{table}
+自然対流による熱伝達率はかなり小さい．このため自然対流熱伝達によって放熱を行う場合には，高温側側面にフィン図hogeを設けて放熱量の増大を計ることが多い．
+\par
+まず，フィンの設置によってどの程度$Q$が増加するかを単純な一枚フィン(図hoge)の場合について考察する．
+\par
+定常状態の条件下でフィンの根元を$x$軸の原点にとり，任意断面$x$における微小区間$dx$に対する熱収支を考慮すると式hoge(2)が導かれる．
+\begin{align}
+  \label{式2}
+  \left( \frac{d}{dx}\right) \left(kS \frac{dT}{dx}\right)dx - hRdx(T-T_0)=0
+\end{align}
+ただし，
+\begin{table}[H]
+\begin{tabular}{ll}
+$k$:フィンの熱伝達率 & ($k = 428$ W/(mK):銅) \\
+$R$:フィン断面の接触長 & ($2 \times (b+L)$) \\
+$S$:フィン断面積 & ($b \times L$) \\
+$T$:$x=x$におけるフィン温度 & \\
+$T_0$:周囲の空気温度 & \\
+$h$:フィン表面の熱伝達率 &
+\end{tabular}
+\end{table}
+$k,S,T_0,h=\mathrm{const}$とすると，式(\ref{式2})は$T$に関する二階の常微分方程式(\ref{式3})となる．
+\begin{align}
+  \label{式3}
+  \frac{d^2T}{dx^2} - \left(\frac{hR}{kS}\right)(T-T_0)=0
+\end{align}
+式(\ref{式3})の解は，$T=T_w$ at $x=0$及び，$dT/dx=0$ at $x=H$となる境界条件より，次式のように表される．
+\begin{align}
+  \label{式4}
+  \frac{T-T_0}{T_w-T_0}=\frac{\cosh{B(H-x)}}{\cosh{BH}}
+\end{align}
+ただし，
+\begin{align}
+  B=\sqrt{\frac{hR}{kS}}
+\end{align}
+式(\ref{式4})で得られた温度分布$T=T(x)$により，一枚のフィンからの放熱量$Q$は次式で与えられる．
+\begin{align}
+  \label{式6}
+  Q &= \int^H_0 hR(T-T_0)dx \\
+  &= \sqrt{\frac{hR}{kS}}(T_w-T_0)\tanh{BH}
+\end{align}
+また，$Q$は次式で定義される基板からフィンに流入する熱量に等しい．
+\begin{align}
+  Q=-kS\left(\frac{dT}{dx}\right)_{x=0}
+\end{align}
+
+\par
+次に，フィンをつけたことによる放熱量の増加分について検討する．フィンがない場合(接触面積 $=S$)の放熱量を$Q_0$とし，フィンをつけた場合(接触面積$=RH$の放熱量)$Q$との比を$\varepsilon$とすると，
+\begin{align}
+  \varepsilon = \frac{Q}{Q_0} = \sqrt{\frac{kR}{hS}}\tanh{BH}
+\end{align}
+
+となる．$\varepsilon$はフィン有効係数と呼ばれる．
+\par
+以上の結果より，$N$枚のフィンによる放熱量$Q_N$は式(\ref{式6})による$Q$を用いて次式で与えられる．
+\begin{align}
+  \label{式9}
+  Q_N = N(hA_w(T_w-T_0)+Q) \simeq NQ
+\end{align}
+ただし，$A_w$はフィンの表面以外での流体との接触面積$PL$であり，フィンと空気との接触面積$A_f = 2HL$に比べて省略できるものとする．
+ここで，式(\ref{式6})と式(\ref{式9})は，$Q_N$を大きくするためにはフィンの熱伝導率$k$，枚数$N$，高さ$H$を大きくし，厚さ$b$を小さくすれば良いことを示している．
+\par
+なお，フィン枚数$N$を大きくすると，フィン相互間の干渉が強くなり，式(\ref{式6})が適用できなくなる．また，ここではフィン表面の熱伝達率$h$を一定と仮定している，実際には$h=h(x)$であり，さらにフィンのピッチ，姿勢によってフィン周囲の流れは大きく変化する．
+本実験では，自然対流場において，複数フィンに対する熱伝達率$h$がフィンの姿勢によりどのように変化するかを実験的に求め，また強制対流が加わった場合に熱伝達率について合わせて検討する．
+
+\section{方法}
+\section{結果}
+\section{考察及び課題}
+
+
+\begin{thebibliography}{9}
+  \bibitem{s1} 知能機械工学基礎実験, 電気通信大学  知能機械工学科
+\end{thebibliography}
+\end{document}

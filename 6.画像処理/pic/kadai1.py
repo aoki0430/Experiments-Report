@@ -16,7 +16,6 @@ imshow(gazo, cmap="gray", vmin=0, vmax=255)
 # 画像を変換
 for x in range(10):
     for y in range(10):
-        # 課題：代入する値を変化させて色の変化を確認しないさい
         gazo[y][x] = 200
 
 print "変換後の画像"

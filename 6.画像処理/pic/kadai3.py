@@ -16,7 +16,6 @@ imshow(gazo, cmap="gray", vmin=0, vmax=255)
 # 画像を変換
 for x in range(10):
     for y in range(10):
-        # 課題：以下の処理を変更して白い四角を表示しなさい
         if (x<=8 and x>=1) and (y<=8 and y>=1) :
             gazo[y][x] = 255
 
